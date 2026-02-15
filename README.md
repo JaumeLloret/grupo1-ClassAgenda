@@ -86,12 +86,37 @@ Ejemplo:
   - EVENTS
   - TASK_SHARES
   - EVENT_SHARES
+  
+- Esquema relacional
+    La base de datos se ha diseñado siguiendo un modelo relacional en Tercera Forma Normal (3FN).
+    
+    Relaciones principales:
+    
+    USERS (1) —— (N) TASKS
+    USERS (1) —— (N) EVENTS
+    TASKS (N) —— (M) USERS mediante TASK_SHARES
+    EVENTS (N) —— (M) USERS mediante EVENT_SHARES
+    
+    Las relaciones N:M se han resuelto mediante tablas intermedias con clave primaria compuesta:
+    
+    TASK_SHARES (task_id, shared_with_user_id)
+    EVENT_SHARES (event_id, shared_with_user_id)
+    
+    Se han definido claves foráneas con ON DELETE CASCADE para mantener la integridad referencial. 
+  
+- Scripts SQL
+    Se incluyen los siguientes scripts en la carpeta /database:
+    
+    01_schema.sql
+    Contiene la creación de la base de datos, tablas, claves primarias, claves foráneas y restricciones.
+    
+    02_seed.sql
+    Inserta datos de prueba para verificar el funcionamiento del modelo y las relaciones.
 
+  
 📌 **Pendiente**:  
-- Esquema relacional  
 - Diagrama E-R  
-- Scripts SQL  
-
+ 
 ---
 
 ## 🌐 API REST
