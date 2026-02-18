@@ -66,9 +66,9 @@ X-User-Id: <id_del_usuario>
 Ejemplo:
 ```
 /api
-  /presentation
-  /application
-  /domain
+  /com.grupo1.classagenda.presentation
+  /com.grupo1.classagenda.application
+  /com.grupo1.classagenda.domain
   /infrastructure
 /client
 /database
