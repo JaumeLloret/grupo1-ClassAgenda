@@ -1,4 +1,4 @@
-package com.classagenda.presentation.utils;
+package com.classagenda.shared.http;
 
 public class JsonResponses {
     public static String success(String mensaje, String datosJson) {

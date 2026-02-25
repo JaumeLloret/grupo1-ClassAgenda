@@ -2,7 +2,7 @@ package com.classagenda.features.example.presentation.handlers;
 
 import com.classagenda.shared.http.JsonResponses;
 import com.classagenda.shared.http.ResponseContract;
-import com.classagenda.shared.http.helpers.JsonEscaper;
+import com.classagenda.shared.http.JsonEscaper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
