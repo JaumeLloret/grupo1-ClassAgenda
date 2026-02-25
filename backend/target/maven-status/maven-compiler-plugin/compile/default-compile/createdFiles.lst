@@ -1,1 +1,9 @@
 com\classagenda\App.class
+com\classagenda\features\example\presentation\handlers\ExampleIntroHandler.class
+com\classagenda\shared\http\HttpServerBootstrap.class
+com\classagenda\shared\http\handlers\HealthHandler.class
+com\classagenda\shared\http\JsonEscaper.class
+com\classagenda\shared\config\ServerConfig.class
+com\classagenda\shared\http\JsonResponses.class
+com\classagenda\features\example\presentation\router\ExampleRouter.class
+com\classagenda\shared\http\ResponseContract.class
