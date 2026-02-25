@@ -1,3 +1,8 @@
-C:\Users\frank\Desktop\github para proyecto\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\Main.java
-C:\Users\frank\Desktop\github para proyecto\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\ServerConfig.java
-C:\Users\frank\Desktop\github para proyecto\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\ServerConfigTest.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\features\example\presentation\handlers\ExampleIntroHandler.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\features\example\presentation\router\ExampleRouter.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\Main.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\presentation\handlers\HealthHandler.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\presentation\utils\JsonEscaper.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\presentation\utils\JsonResponses.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\ServerConfig.java
+C:\Users\Neiva\Desktop\proyecto_intermodular\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\http\HttpServerBootstrap.java
