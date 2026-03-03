@@ -1,5 +1,7 @@
 package com.classagenda.shared.http;
 
+import com.classagenda.shared.utilities.JsonEscaper;
+
 import java.time.Instant;
 
 public final class ResponseContract {
