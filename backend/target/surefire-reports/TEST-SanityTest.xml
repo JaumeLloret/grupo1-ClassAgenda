@@ -15,7 +15,7 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Users\Usuario\.jdks\openjdk-25\bin"/>
-    <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire8677696038657911182\surefirebooter-20260303185009623_3.jar C:\Users\Usuario\AppData\Local\Temp\surefire8677696038657911182 2026-03-03T18-50-09_306-jvmRun1 surefire-20260303185009623_1tmp surefire_0-20260303185009623_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire6512641221321328186\surefirebooter-20260303193656917_3.jar C:\Users\Usuario\AppData\Local\Temp\surefire6512641221321328186 2026-03-03T19-36-56_792-jvmRun1 surefire-20260303193656917_1tmp surefire_0-20260303193656917_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\target\test-classes;C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\target\classes;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\Usuario\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\Usuario\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;C:\Users\Usuario\.m2\repository\com\microsoft\sqlserver\mssql-jdbc\13.2.1.jre11\mssql-jdbc-13.2.1.jre11.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire8677696038657911182\surefirebooter-20260303185009623_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire6512641221321328186\surefirebooter-20260303193656917_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25+36-3489"/>
@@ -64,5 +64,5 @@
     <property name="maven.repo.local" value="C:\Users\Usuario\.m2\repository"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="sanity" classname="SanityTest" time="0.0"/>
+  <testcase name="sanity" classname="SanityTest" time="0.001"/>
 </testsuite>

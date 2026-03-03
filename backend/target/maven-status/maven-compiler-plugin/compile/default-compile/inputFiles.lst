@@ -4,6 +4,6 @@ C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\
 C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\config\ServerConfig.java
 C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\http\handlers\HealthHandler.java
 C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\http\HttpServerBootstrap.java
-C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\http\JsonEscaper.java
 C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\http\JsonResponses.java
 C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\http\ResponseContract.java
+C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\main\java\com\classagenda\shared\utilities\JsonEscaper.java
