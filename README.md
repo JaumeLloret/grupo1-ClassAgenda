@@ -47,6 +47,33 @@ El proyecto integra contenidos de Programación, Bases de Datos, Sistemas Inform
 
 ---
 
+## 📈 Metodología y Normas de Trabajo
+
+El proyecto se desarrolla siguiendo **Extreme Programming (XP)**:
+
+- Trabajo en iteraciones
+- Pair programming
+- Commits pequeños y frecuentes
+- Uso de Issues, Projects y Pull Requests en GitHub
+- Refactorización continua
+
+### Estilo de Commits
+Utilizaremos el estándar de **Conventional Commits** para mantener un historial claro:
+- **Formato:** `<tipo>: <descripción corta en minúsculas>`
+- **Tipos comunes:**
+    - `feat`: Nueva funcionalidad.
+    - `fix`: Corrección de un error.
+    - `refactor`: Cambio de código que no añade funciones ni corrige errores.
+    - `docs`: Cambios en la documentación.
+    - `style`: Formateo de código (espacios, puntos y coma, etc.).
+
+### Flujo de Pull Requests (PR)
+1. **Ramas:** No se permite subir código directamente a `main`. Se debe crear una rama descriptiva (ej. `feature/nombre-tarea`).
+2. **Vinculación:** Cada PR debe indicar qué tarea resuelve usando `Closes #ID_ISSUE`.
+3. **Revisión:** Antes del merge, el código debe ser revisado por un miembro del equipo que no haya participado en ese desarrollo.
+
+---
+
 ## 🚫 Restricciones
 
 - No se utilizan frameworks
