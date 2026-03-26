@@ -35,7 +35,7 @@ class JdbcTaskRepositoryIT {
         DbConnectionFactory factory = new DbConnectionFactory();
 
         // 1. El Cliente (este Test) abre y gestiona LA ÚNICA conexión a la base de datos.
-        try (Connection sharedConnection = factory.open()) {
+        try (Connection sharedConnection = factory.getConnection()) {
 
             // 2. INYECCIÓN: Suministramos exactamente la MISMA conexión a ambos DAOs.
             // Esto es lo que permite que en el futuro puedan realizar Transacciones conjuntas (todo o nada).
