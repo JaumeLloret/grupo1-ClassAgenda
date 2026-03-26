@@ -73,4 +73,15 @@ public final class Task {
             throw new SecurityException("Acceso denegado: No eres el propietario de esta tarea.");
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() { return title; }
+    public String getDescription() { return description; }
+    public TaskStatus getStatus() { return status; }
+    public TaskPriority getPriority() { return priority; }
+    public Long getOwnerId() { return ownerId; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
 }
