@@ -1,10 +1,10 @@
 package com.classagenda;
 
-import com.classagenda.shared.http.HttpServerBootstrap;
+import com.classagenda.shared.http.JsonResponses;
 
 public class App {
     public static void main(String[] args) throws Exception {
         // Instancia y arranca el servidor HTTP
-        new HttpServerBootstrap().start();
+        new JsonResponses.HttpServerBootstrap().start();
     }
 }

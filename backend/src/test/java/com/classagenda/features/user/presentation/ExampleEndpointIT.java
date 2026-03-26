@@ -1,6 +1,6 @@
-package com.classagenda.features.example.presentation;
+package com.classagenda.features.user.presentation;
 
-import com.classagenda.shared.http.HttpServerBootstrap;
+import com.classagenda.shared.http.JsonResponses;
 import com.sun.net.httpserver.HttpServer;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class ExampleEndpointIT {
     @Test
     void getExampleIntoReturnsJsonAnd200() throws Exception {
         System.setProperty("CLASSAGENDA_PORT", "0");
-        HttpServerBootstrap bootstrap = new HttpServerBootstrap();
+        JsonResponses.HttpServerBootstrap bootstrap = new JsonResponses.HttpServerBootstrap();
 
         HttpServer httpServer = bootstrap.startAndReturnServer();
         int realPort = httpServer.getAddress().getPort();
