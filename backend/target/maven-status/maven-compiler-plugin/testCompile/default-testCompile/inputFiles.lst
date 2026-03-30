@@ -1,4 +1,5 @@
-C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\test\java\com\classagenda\features\example\presentation\ExampleEndpointIT.java
-C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\test\java\com\classagenda\Main.java
-C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\test\java\com\classagenda\shared\config\ServerConfigTest.java
-C:\Users\Usuario\Desktop\Programación\grupo1-ClassAgenda\backend\src\test\java\SanityTest.java
+C:\Users\frank\Desktop\prueba\backend\src\test\java\com\classagenda\features\user\data\repository\JdbcUserRepositoryIT.java
+C:\Users\frank\Desktop\prueba\backend\src\test\java\com\classagenda\features\user\presentation\ExampleEndpointIT.java
+C:\Users\frank\Desktop\prueba\backend\src\test\java\com\classagenda\Main.java
+C:\Users\frank\Desktop\prueba\backend\src\test\java\com\classagenda\SanityTest.java
+C:\Users\frank\Desktop\prueba\backend\src\test\java\com\classagenda\shared\config\ServerConfigTest.java
