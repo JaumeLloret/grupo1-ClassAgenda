@@ -1,0 +1,61 @@
+package com.classagenda.features.user.data.repository;
+
+import com.classagenda.features.user.data.local.dao.UserDao;
+import com.classagenda.features.user.domain.model.User;
+import com.classagenda.shared.config.DbConfig;
+import com.classagenda.features.example.data.local.connection.DbConnectionFactory;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.sql.SQLException;
+import java.time.temporal.ChronoUnit;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class JdbcUserRepositoryIT {
+    private JdbcUserRepository userRepository;
+
+    @BeforeEach
+    void setUp() {
+        try {
+            DbConfig.url();
+        } catch (Exception e) {
+            // Como no tenemos aun el .env , saltamos el test de integración
+            Assumptions.assumeTrue(false, "Saltando test de integración: No hay configuración de base de datos (.env) disponible.");
+        }
+
+
+        DbConnectionFactory connectionFactory = new DbConnectionFactory();
+        UserDao userDao = null;
+        try {
+            userDao = new UserDao(connectionFactory.getConnection());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        userRepository = new JdbcUserRepository(userDao);
+    }
+
+    @Test
+    void savesNewUserAndFindsItByEmail() {
+        String uniqueEmail = "test_" + System.currentTimeMillis() + "@ejemplo.com";
+        User userToSave = new User("Prueba Integración", uniqueEmail);
+
+        User savedUser = userRepository.save(userToSave);
+
+        assertNotNull(savedUser.getId(), "El usuario guardado debería tener un ID generado por la BD");
+        assertEquals("Prueba Integración", savedUser.getName());
+        assertEquals(uniqueEmail, savedUser.getEmail());
+
+        Optional<User> foundUserOpt = userRepository.findByEmail(uniqueEmail);
+        assertTrue(foundUserOpt.isPresent(), "Deberíamos encontrar al usuario recién guardado");
+
+        User foundUser = foundUserOpt.get();
+        assertEquals(savedUser.getId(), foundUser.getId());
+        assertEquals(
+                savedUser.getCreatedAt().truncatedTo(ChronoUnit.SECONDS),
+                foundUser.getCreatedAt().truncatedTo(ChronoUnit.SECONDS)
+        );
+    }
+}

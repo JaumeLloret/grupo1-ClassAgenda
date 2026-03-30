@@ -1,1 +1,4 @@
+com\classagenda\shared\config\ServerConfigTest.class
+com\classagenda\features\example\presentation\ExampleEndpointIT.class
+SanityTest.class
 com\classagenda\Main.class
