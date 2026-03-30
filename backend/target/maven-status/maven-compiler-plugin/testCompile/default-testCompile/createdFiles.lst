@@ -1,4 +1,5 @@
+com\classagenda\features\user\data\repository\JdbcUserRepositoryIT.class
 com\classagenda\shared\config\ServerConfigTest.class
-com\classagenda\features\example\presentation\ExampleEndpointIT.class
-SanityTest.class
+com\classagenda\features\user\presentation\ExampleEndpointIT.class
+com\classagenda\SanityTest.class
 com\classagenda\Main.class
