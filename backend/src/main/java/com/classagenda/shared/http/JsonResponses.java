@@ -35,7 +35,8 @@ public final class JsonResponses {
 
 // 1. Creamos las piezas del puzle técnico
             DbConnectionFactory factory = new DbConnectionFactory();
-            Connection sharedConnection = factory.open();
+            Connection sharedConnection = factory.getConnection();
+
 
 // 2. Instanciamos el DAO inyectándole la conexión
             TaskDao taskDao = new TaskDao(sharedConnection);
