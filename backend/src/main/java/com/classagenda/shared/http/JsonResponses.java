@@ -1,6 +1,10 @@
 package com.classagenda.shared.http;
 
+import com.classagenda.features.example.data.local.connection.DbConnectionFactory;
 import com.classagenda.features.example.presentation.router.ExampleRouter;
+import com.classagenda.features.task.data.local.dao.TaskDao;
+import com.classagenda.features.task.data.repository.JdbcTaskRepository;
+import com.classagenda.features.task.presentation.handlers.TaskHandler;
 import com.classagenda.shared.config.ServerConfig;
 import com.classagenda.shared.http.handlers.HealthHandler;
 import com.sun.net.httpserver.HttpExchange;
@@ -9,6 +13,7 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
 
 public final class JsonResponses {
     private JsonResponses() {}
@@ -27,6 +32,22 @@ public final class JsonResponses {
             HttpServer httpServer = startAndReturnServer();
             int serverPort = httpServer.getAddress().getPort();
             System.out.println("ClassAgenda API funcionando en http://localhost:" + serverPort);
+
+// 1. Creamos las piezas del puzle técnico
+            DbConnectionFactory factory = new DbConnectionFactory();
+            Connection sharedConnection = factory.open();
+
+// 2. Instanciamos el DAO inyectándole la conexión
+            TaskDao taskDao = new TaskDao(sharedConnection);
+
+// 3. Instanciamos el Repositorio inyectándole el DAO
+            JdbcTaskRepository taskRepository = new JdbcTaskRepository(taskDao);
+
+// 4. Instanciamos el Handler (Presentación) inyectándole el Repositorio
+            TaskHandler taskHandler = new TaskHandler(taskRepository);
+
+// 5. Unimos el cable al Servidor HTTP
+            httpServer.createContext("/tasks", taskHandler);
         }
 
         public HttpServer startAndReturnServer() throws Exception {

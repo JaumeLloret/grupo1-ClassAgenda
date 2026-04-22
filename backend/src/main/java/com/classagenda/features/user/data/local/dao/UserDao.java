@@ -1,215 +1,111 @@
 package com.classagenda.features.user.data.local.dao;
 
 import com.classagenda.features.user.data.local.entity.UserEntity;
-
 import java.sql.*;
-
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
-
 import java.util.List;
-
 import java.util.Optional;
 
 public final class UserDao {
-
+    // 1. INYECCIÓN DE DEPENDENCIAS: Dependemos exclusivamente de la abstracción nativa de Java
     private final Connection connection;
 
+    // Exigimos que la conexión ya abierta nos sea inyectada
     public UserDao(Connection connection) {
-
         this.connection = connection;
-
     }
 
-    public UserEntity insert(UserEntity userEntity) {
+    public UserEntity insert(UserEntity entity) {
+        String query = "INSERT INTO USERS (name, email, created_at) VALUES (?, ?, ?)";
 
-        String query = "INSERT INTO users (name, email, created_at) VALUES (?, ?, ?)";
+        // 2. FÍJATE BIEN: Solo envolvemos el PreparedStatement. La connection queda fuera del try-with-resources.
+        try (PreparedStatement pstmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, entity.getName());
+            pstmt.setString(2, entity.getEmail());
+            pstmt.setObject(3, entity.getCreatedAt());
 
-        try (PreparedStatement createUserStmt = connection
+            pstmt.executeUpdate();
 
-                .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-
-            createUserStmt.setString(1, userEntity.getName());
-
-            createUserStmt.setString(2, userEntity.getEmail());
-
-            createUserStmt.setObject(3, userEntity.getCreatedAt());
-
-            int affectedRows = createUserStmt.executeUpdate();
-
-            if (affectedRows == 0) {
-
-                throw new SQLException("No se pudo insertar el usuario");
-
-            }
-
-            try (ResultSet generatedKeys = createUserStmt.getGeneratedKeys()) {
-
+            try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-
-                    userEntity.setId(generatedKeys.getLong(1));
-
-                    return userEntity;
-
+                    entity.setId(generatedKeys.getLong(1));
+                    return entity;
                 } else {
-
-                    throw new SQLException("No se pudo obtener el ID autogenerado.");
-
+                    throw new SQLException("Error crítico: No se recuperó el ID.");
                 }
-
             }
-
         } catch (SQLException e) {
-
-            throw new RuntimeException("Error en BD al insertar usuario", e);
-
+            throw new RuntimeException("Error insertando usuario", e);
         }
-
     }
-
-    public void update(UserEntity entityToUpdate) {
-
+    public void update(UserEntity entity) {
         String query = "UPDATE USERS SET name = ?, email = ? WHERE id = ?";
-
-        try (PreparedStatement updateUserStmt = connection.prepareStatement(query)) {
-
-            updateUserStmt.setString(1, entityToUpdate.getName());
-
-            updateUserStmt.setString(2, entityToUpdate.getEmail());
-
-            updateUserStmt.setLong(3, entityToUpdate.getId());
-
-            int affectedRows = updateUserStmt.executeUpdate();
-
-            if (affectedRows == 0) {
-
-                throw new SQLException("No se pudo actualizar el usuario, el ID no existe.");
-
-            }
-
-        } catch (SQLException exception) {
-
-            throw new RuntimeException("Error en BD al actualizar usuario", exception);
-
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, entity.getName());
+            pstmt.setString(2, entity.getEmail());
+            pstmt.setLong(3, entity.getId());
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows == 0) throw new SQLException("Update fallido: El usuario no existe.");
+        } catch (SQLException e) {
+            throw new RuntimeException("Error actualizando usuario", e);
         }
-
-    }
-
-    public Optional<UserEntity> findById(Long idToSearch) {
-
-        String query = "SELECT id, name, email, created_at FROM USERS WHERE id = ?";
-
-        try (PreparedStatement readByIdUserStmt = connection.prepareStatement(query)) {
-
-            readByIdUserStmt.setLong(1, idToSearch);
-
-            try (ResultSet resultSet = readByIdUserStmt.executeQuery()) {
-
-                if (resultSet.next()) {
-
-                    return Optional.of(mapResultSetToEntity(resultSet));
-
-                }
-
-                return Optional.empty();
-
-            }
-
-        } catch (SQLException exception) {
-
-            throw new RuntimeException("Error en BD al buscar usuario por ID", exception);
-
-        }
-
     }
 
     public Optional<UserEntity> findByEmail(String email) {
-
         String query = "SELECT id, name, email, created_at FROM USERS WHERE email = ?";
-
-        try (PreparedStatement readByEmailUserStmt = connection.prepareStatement(query)) {
-
-            readByEmailUserStmt.setString(1, email);
-
-            try (ResultSet resultSet = readByEmailUserStmt.executeQuery()) {
-
-                if (resultSet.next()) {
-
-                    return Optional.of(mapResultSetToEntity(resultSet));
-
-                }
-
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setString(1, email);
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                if (resultSet.next()) return Optional.of(mapResultSetToEntity(resultSet));
                 return Optional.empty();
-
             }
-
         } catch (SQLException e) {
-
-            throw new RuntimeException("Error en BD al buscar usuario por email", e);
-
+            throw new RuntimeException("Error buscando usuario por email", e);
         }
+    }
 
+    public Optional<UserEntity> findById(Long id) {
+        String query = "SELECT id, name, email, created_at FROM USERS WHERE id = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setLong(1, id);
+            try (ResultSet resultSet = pstmt.executeQuery()) {
+                if (resultSet.next()) return Optional.of(mapResultSetToEntity(resultSet));
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error buscando usuario por ID", e);
+        }
     }
 
     public List<UserEntity> findAll() {
-
         String query = "SELECT id, name, email, created_at FROM USERS";
-
-        List<UserEntity> usersList = new ArrayList<>();
-
-        try (PreparedStatement readAllUserStmt = connection.prepareStatement(query);
-
-             ResultSet resultSet = readAllUserStmt.executeQuery()) {
-
-            while (resultSet.next()) {
-
-                usersList.add(mapResultSetToEntity(resultSet));
-
-            }
-
-            return usersList;
-
-        } catch (SQLException exception) {
-
-            throw new RuntimeException("Error en BD al recuperar todos los usuarios", exception);
-
+        List<UserEntity> list = new ArrayList<>();
+        try (PreparedStatement pstmt = connection.prepareStatement(query);
+             ResultSet resultSet = pstmt.executeQuery()) {
+            while (resultSet.next()) list.add(mapResultSetToEntity(resultSet));
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error recuperando todos los usuarios", e);
         }
+    }
 
+    public void deleteById(Long id) {
+        String query = "DELETE FROM USERS WHERE id = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setLong(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error borrando usuario", e);
+        }
     }
 
     private UserEntity mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-
         return new UserEntity(
-
                 resultSet.getLong("id"),
-
                 resultSet.getString("name"),
-
                 resultSet.getString("email"),
-
                 resultSet.getObject("created_at", LocalDateTime.class)
-
         );
-
     }
-
-    public void deleteById(Long idToDelete) {
-
-        String query = "DELETE FROM USERS WHERE id = ?";
-
-        try (PreparedStatement deleteUserStmt = connection.prepareStatement(query)) {
-
-            deleteUserStmt.setLong(1, idToDelete);
-
-            deleteUserStmt.executeUpdate();
-
-        } catch (SQLException exception) {
-
-            throw new RuntimeException("Error en BD al borrar usuario por ID", exception);
-
-        }
-
-    }
-
 }
